@@ -1,62 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Depreciation Calculator</title>
-    <style>
-        body {
-            background: lightblue; 
-            font-family: arial;
-            color: navy;
-        }
-        button {padding: 10px; background: violet;}
-        span {color: maroon;}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anagram Checker</title>
 </head>
 <body>
-    <h1> Car Depreciation Calculator </h1>
-    <h2> Your Car Model: <span id="model"> </span></h2>
-    <h2> Car Cost: <span id="cost"> </span></h2>
-    <h2> Age of your Car: <span id="age"> </span></h2>
-    <h2> Good Condition?: <span id="condition"> </span></h2>
-    <h2> Your Car's Current Market Value <span id="currentvalue"> </span></h2>
-    
-    <button onclick="carInfo()"> Enter your Car information </button>
+  <h1>Anagram Checker</h1>
+  <button onclick="Anagram()">Check Anagram</button>
 
-    <script>
-	
-        function carInfo() {
-            var model = prompt("Enter your car model:");
-            var cost = parseFloat(prompt("How much it cost:"));
-            var age = parseInt(prompt("How old is your car (years):"));
-            var condition = prompt("Is your car in good condition? (yes/no):").toLowerCase() === "yes";
-            
-            document.getElementById("model").innerHTML = model;
-            document.getElementById("cost").innerHTML = "₱" + cost.toFixed(2);
-            document.getElementById("age").innerHTML = age + " years";
-            document.getElementById("condition").innerHTML = condition ? "Yes" : "No";
-            
-            var CMV = marketValue(cost, age, condition);
-            document.getElementById("currentvalue").innerHTML = "₱" + CMV.toFixed(2);
-        }
+  <script>
+    function Anagram() {
+      function areAnagrams(input1, input2) {
+        return input1.replace(/\s/g, '').toLowerCase().split('').sort().join('') === input2.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+      }
 
-        function marketValue(cost, age, condition) {
-            if (age > 10) {
-                CMV = 70000;
-            } else if (age >= 8) {
-                CMV = 100000;
-            } else if (age >= 5) {
-                CMV = cost * 0.25;
-            } else {
-                CMV = cost * 0.50;
-            }
+      const input1 = prompt("Enter the first word/phrase:");
+      const input2 = prompt("Enter the second word/phrase:");
 
-            if (!condition) {
-                CMV = CMV * 0.1;
-            }
+      if (!input1 || !input2) {
+        alert("Please enter valid inputs.");
+        return;
+      }
 
-            return CMV;
-        }
-    </script>
+      if (areAnagrams(input1, input2)) {
+        alert(input1 + " and " + input2 + " are anagrams!");
+      } else {
+        alert(input1 + " and " + input2 + " are not anagrams.");
+      }
+    }
+  </script>
 </body>
 </html>
